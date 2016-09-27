@@ -60,12 +60,15 @@ func validateColums(arr *[]byte, length int) bool {
 
 func validate(arr *[]byte, length int) bool {
 	entries := make(map[int]byte, length)
+	count := 0
 	for i := 0; i < length; i++ {
 		//TODO: Casting int to byte can lose info... not expecting size to be bigger than 255.
 		if (*arr)[i] > 0 && (*arr)[i] <= byte(length) {
 			entries[int((*arr)[i])] = (*arr)[i]
+			count++
 		}
 	}
-	result := len(entries) == length
+	//check that all the entries added to the map were unique
+	result := len(entries) == count
 	return result
 }
