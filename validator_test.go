@@ -15,6 +15,10 @@ func TestValidate(t *testing.T) {
 	if result {
 		t.Error("Validated an invalid gameboard.")
 	}
+	solved = []byte{5, 9, 6, 2, 1, 5, 5, 3, 2, 8, 3, 4, 6, 4, 7, 8, 9, 6, 2, 7, 1, 3, 9, 8, 1, 7, 4, 4, 1, 8, 9, 6, 1, 4, 1, 3, 9, 6, 7, 8, 3, 4, 2, 5, 8, 3, 5, 2, 5, 7, 2, 9, 6, 7, 1, 8, 9, 4, 2, 3, 3, 4, 5, 6, 2, 3, 7, 8, 9, 6, 2, 9, 7, 4, 5, 1, 5, 6, 7, 8, 1}
+	if result {
+		t.Error("Validated an invalid gameboard.")
+	}
 }
 
 func TestValidateRows(t *testing.T) {
