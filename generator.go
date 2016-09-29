@@ -1,7 +1,6 @@
 package godoku
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -32,8 +31,7 @@ func (t *Tracker) Clear(index int) {
 }
 
 //Generate a game board
-func Generate(size int) {
-	//start := time.Now()
+func Generate(size int) *[]byte {
 	total := byte(size * size)
 	board := make([]byte, total)
 	rand.Seed(time.Now().Unix())
@@ -41,10 +39,8 @@ func Generate(size int) {
 
 	//Attempting to avoid a recursive algorithm.
 	for i := byte(0); i < total; i++ {
-		//fmt.Println(i, tracker.attempts[i])
 		//there are no more unique numbers left to check
 		if len(tracker.attempts[i]) == size {
-			//fmt.Println("Resetting!")
 			tracker.Clear(int(i))
 			//fmt.Println("Resetting. ", i, tracker.attempts[i])
 			board[i] = 0
@@ -63,11 +59,8 @@ func Generate(size int) {
 
 		//Not a valid number, and we need to try again
 		i--
-
 	}
-
-	//fmt.Println(time.Since(start))
-	fmt.Println(board)
+	return &board
 }
 
 func availableNum(size int, used map[byte]bool) byte {
