@@ -1,8 +1,6 @@
 package godoku
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestGenerate(t *testing.T) {
 	Generate(9)

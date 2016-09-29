@@ -11,6 +11,7 @@ type Tracker struct {
 	attempts []map[byte]bool
 }
 
+//NewTracker creates a tracker based on a passed size
 func NewTracker(size int) *Tracker {
 	out := new(Tracker)
 	out.attempts = make([]map[byte]bool, size*size)
@@ -20,6 +21,7 @@ func NewTracker(size int) *Tracker {
 	return out
 }
 
+//Clear replaces one of the maps with a new one
 func (t *Tracker) Clear(index int) {
 	//This is probably a naive way of clearing. I should probably just reset each key in the map to false
 	//but it will work for now.
@@ -31,7 +33,7 @@ func (t *Tracker) Clear(index int) {
 
 //Generate a game board
 func Generate(size int) {
-	start := time.Now()
+	//start := time.Now()
 	total := byte(size * size)
 	board := make([]byte, total)
 	rand.Seed(time.Now().Unix())
@@ -39,12 +41,12 @@ func Generate(size int) {
 
 	//Attempting to avoid a recursive algorithm.
 	for i := byte(0); i < total; i++ {
-		fmt.Println(i, tracker.attempts[i])
+		//fmt.Println(i, tracker.attempts[i])
 		//there are no more unique numbers left to check
 		if len(tracker.attempts[i]) == size {
-			fmt.Println("Resetting!")
+			//fmt.Println("Resetting!")
 			tracker.Clear(int(i))
-			fmt.Println("Resetting. ", i, tracker.attempts[i])
+			//fmt.Println("Resetting. ", i, tracker.attempts[i])
 			board[i] = 0
 			i -= 2 //should be one or 2?
 			continue
@@ -64,7 +66,7 @@ func Generate(size int) {
 
 	}
 
-	fmt.Println(time.Since(start))
+	//fmt.Println(time.Since(start))
 	fmt.Println(board)
 }
 
@@ -73,11 +75,7 @@ func availableNum(size int, used map[byte]bool) byte {
 	//TODO: Keep track of UNUSED numbers, as well as used, and then select from the unused.
 	//This method *theoretically* could take a very long time. Until I have a working verion it's fine.
 	for {
-		fmt.Println(size)
 		out := byte(rand.Intn(size) + 1)
-		if out == byte(9) {
-			fmt.Println(out)
-		}
 		if _, contained := used[out]; contained {
 			continue
 		}

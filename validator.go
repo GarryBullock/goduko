@@ -4,7 +4,7 @@ package godoku
 func Validate(arr *[]byte, length int) bool {
 	if validateBlocks(arr, length) {
 		if validateColums(arr, length) {
-			if validateColums(arr, length) {
+			if validateRows(arr, length) {
 				return true
 			}
 		}

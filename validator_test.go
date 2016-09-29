@@ -16,6 +16,7 @@ func TestValidate(t *testing.T) {
 		t.Error("Validated an invalid gameboard.")
 	}
 	solved = []byte{5, 9, 6, 2, 1, 5, 5, 3, 2, 8, 3, 4, 6, 4, 7, 8, 9, 6, 2, 7, 1, 3, 9, 8, 1, 7, 4, 4, 1, 8, 9, 6, 1, 4, 1, 3, 9, 6, 7, 8, 3, 4, 2, 5, 8, 3, 5, 2, 5, 7, 2, 9, 6, 7, 1, 8, 9, 4, 2, 3, 3, 4, 5, 6, 2, 3, 7, 8, 9, 6, 2, 9, 7, 4, 5, 1, 5, 6, 7, 8, 1}
+	result = Validate(&solved, 9)
 	if result {
 		t.Error("Validated an invalid gameboard.")
 	}
@@ -72,6 +73,14 @@ func TestValidateRow(t *testing.T) {
 
 	row2 := []byte{1, 1, 2, 3, 4, 5, 6, 7, 8}
 	result = validate(&row2, 9)
+	if result {
+		t.Error("Failed. result should have been false")
+	}
+
+	//non valid
+	//4 2 8 6 8 1 7 2 9
+	row = []byte{4, 2, 8, 6, 8, 1, 7, 2, 9}
+	result = validate(&row, 9)
 	if result {
 		t.Error("Failed. result should have been false")
 	}
